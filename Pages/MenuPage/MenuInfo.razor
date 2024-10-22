@@ -1,0 +1,24 @@
+@page "/systemsetting/menu/add"
+@page "/systemsetting/menu/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysMenuComponent
+@using IFinancing360_SYS_UI.Components.SysMenuRoleComponent
+
+<Card>
+  <Title Text="Menu Info" />
+
+  <SysMenuForm ID="@ID" />
+
+  <!-- #region List Detail -->
+  @if (ID != null)
+  {
+    <Divider />
+    <Title Text="Role List" />
+
+    <SysMenuRoleDataGrid MenuID="@ID" />
+  }
+  <!-- #endregion -->
+</Card>
+@code {
+  [Parameter] public string? ID { get; set; }
+}

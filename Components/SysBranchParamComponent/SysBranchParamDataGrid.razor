@@ -1,0 +1,19 @@
+<RadzenStack>
+  <RadzenStack>
+    <!-- #region Toolbar -->
+    <RadzenRow Gap="8">
+      <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+      <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete"  />
+    </RadzenRow>
+    <!-- #endregion -->
+
+    <!-- #region List Data -->
+    <DataGrid ID="BranchDataGrid" @ref=@dataGrid TItem="SysBranchParamModel" LoadData="LoadData" AllowSelected="true">
+      <DataGridColumn TItem="SysBranchParamModel" Property="Code" Title="Code" Width="20%"
+        Link="@(row => $"/companyinformation/branch/{BranchID}/branchparam/{row.ID}")" TextAlign="TextAlign.Center" />
+      <DataGridColumn TItem="SysBranchParamModel" Property="Description" Title="Description" />
+      <DataGridColumn TItem="SysBranchParamModel" Property="Value" Title="Value" Width="20%" />
+    </DataGrid>
+    <!-- #endregion -->
+  </RadzenStack>
+</RadzenStack>

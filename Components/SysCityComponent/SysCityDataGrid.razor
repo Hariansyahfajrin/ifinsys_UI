@@ -1,0 +1,16 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="CityDataGrid" @ref=@dataGrid TItem="SysCityModel" LoadData="LoadData" AllowSelected="false">
+    <DataGridColumn TItem="SysCityModel" Property="Code" Title="Code" Width="20%"
+      Link="@(row => $"/commonmasterfile/province/{ProvinceID}/city/{row.ID}")" />
+    <DataGridColumn TItem="SysCityModel" Property="Description" Title="Description" />
+    <DataGridColumn TItem="SysCityModel" Property="IsActive" Title="Active" Width="20%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

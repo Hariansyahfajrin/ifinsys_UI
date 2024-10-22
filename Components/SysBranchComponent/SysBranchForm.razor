@@ -1,0 +1,147 @@
+<!-- #region Form -->
+  <RadzenTemplateForm TItem="SysBranchModel" Data="@row" Submit=@OnSubmit>
+    <RadzenStack>
+      <!-- #region Toolbar -->
+      <RadzenRow Gap="8">
+        <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+        @if (ID != null)
+        {
+          <RadzenButton ButtonStyle=@(row.IsActive == 1 ? ButtonStyle.Danger : ButtonStyle.Success) Text=@(row.IsActive ==
+          1 ? "Non Active" : "Active") Click="@ChangeActive" />
+        }
+        <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+      </RadzenRow>
+      <!-- #endregion -->
+
+      <RadzenStack>
+        <RadzenRow>
+          <!-- #region Code -->
+          <FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Disabled="@(ID != null)" Max="50"
+            Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Description -->
+          <FormFieldTextArea Label="Name" Name="Name" @bind-Value="@row.Name" Max="50" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Branch Type -->
+          <FormFieldDropdown TValue="string" Label="Type" Name="BranchType" Items="@BranchTypes"
+            @bind-Value="@row.BranchType" Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Phone No -->
+          <FormFieldContact Label="Phone No" Name="PhoneNo" @bind-Value="@row.PhoneNo"
+            @bind-AreaValue="@row.AreaPhoneNo" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Fax No -->
+          <FormFieldContact Label="Fax No" Name="FaxNo" @bind-Value="@row.FaxNo" @bind-AreaValue="@row.AreaFaxNo"
+            />
+          <!-- #endregion -->
+
+          <!-- #region Email -->
+          <FormFieldTextBox Label="Email" Name="Email" @bind-Value="@row.EmailDefault" Max="50" Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Area Branch (Region) -->
+          <FormFieldButtonLookup Name="RegionID" Label="Region" Target="regionLookup" @bind-Value="@row.RegionID"
+            @bind-Text="@row.RegionDescription" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Province -->
+          <FormFieldButtonLookup Name="ProvinceID" Label="Province" Target="provinceLookup"
+            @bind-Value="@row.ProvinceID" @bind-Text="@row.ProvinceDescription" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region City -->
+          <FormFieldButtonLookup Name="CityID" Label="City" Target="cityLookup" @bind-Value="@row.CityID"
+            @bind-Text="@row.CityDescription" Required="true" Disabled=@(row.ProvinceID == null) />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Zip Code -->
+          <FormFieldButtonLookup Name="ZipCodeID" Label="Zip Code" Target="zipCodeLookup" @bind-Value="@row.ZipCodeID"
+            @bind-Text="@row.ZipCodePostalCode" Required="true" Disabled=@(row.ProvinceID == null || row.CityID == null) />
+          <!-- #endregion -->
+
+          <!-- #region Sub District -->
+          <FormFieldTextBox Label="Sub District" Name="SubDistrict" @bind-Value="@row.SubDistrict" Disabled Max="250"
+            Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Village -->
+          <FormFieldTextBox Label="Village" Name="Village" @bind-Value="@row.Village" Disabled Max="250"
+            Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Address -->
+          <FormFieldTextArea Label="Address" Name="Address" @bind-Value="@row.Address" Max="4000" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Syariah -->
+          <FormFieldSwitch Name="IsSyariah" Label="Syariah" @bind-Value="@row.IsSyariah" />
+          <!-- #endregion -->
+
+          <!-- #region Is Active -->
+          <FormFieldSwitch Name="IsActive" Label="Active" @bind-Value="@row.IsActive" Disabled />
+          <!-- #endregion -->
+        </RadzenRow>
+      </RadzenStack>
+    </RadzenStack>
+  </RadzenTemplateForm>
+  <!-- #endregion -->
+
+	
+<!-- #region Region Lookup -->
+<SingleSelectLookup ID="RegionLookup" @ref="@regionLookup" TItem="SysRegionModel" LoadData="LoadRegionLookup"
+	Title="Region List" Select="(select) => {
+row.RegionID = select.ID;
+row.RegionDescription = select.Description;
+}">
+	<DataGridColumn TItem="SysRegionModel" Property="Code" Title="Code" />
+	<DataGridColumn TItem="SysRegionModel" Property="Description" Title="Description" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region Province Lookup -->
+<SingleSelectLookup ID="ProvinceLookup" @ref="@provinceLookup" TItem="SysProvinceModel" LoadData="LoadProvinceLookup"
+	Title="Province List" Select="(select) => {
+row.ProvinceID = select.ID;
+row.ProvinceDescription = select.Description;
+}">
+	<DataGridColumn TItem="SysProvinceModel" Property="Code" Title="Code" />
+	<DataGridColumn TItem="SysProvinceModel" Property="Description" Title="Description" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region City Lookup -->
+<SingleSelectLookup ID="CityLookup" @ref="@cityLookup" TItem="SysCityModel" LoadData="LoadCityLookup" Title="City List"
+	Select="(select) => {
+row.CityID = select.ID;
+row.CityDescription = select.Description;
+}">
+	<DataGridColumn TItem="SysCityModel" Property="Code" Title="Code" />
+	<DataGridColumn TItem="SysCityModel" Property="Description" Title="Description" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region Zip Code Lookup -->
+<SingleSelectLookup ID="ZipCodeLookup" @ref="@zipCodeLookup" TItem="SysZipCodeModel" LoadData="LoadZipCodeLookup"
+	Title="Zip Code List" Select="(select) => {
+row.ZipCodeID = select.ID;
+row.ZipCodePostalCode = select.PostalCode;
+row.SubDistrict = select.SubDistrict;
+row.Village = select.Village;
+}">
+	<DataGridColumn TItem="SysZipCodeModel" Property="PostalCode" Title="Postal Code" />
+	<DataGridColumn TItem="SysZipCodeModel" Property="SubDistrict" Title="Sub District" />
+	<DataGridColumn TItem="SysZipCodeModel" Property="Village" Title="Village" />
+</SingleSelectLookup>
+<!-- #endregion -->

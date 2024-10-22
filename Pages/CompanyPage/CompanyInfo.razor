@@ -1,0 +1,23 @@
+@page "/companyinformation/company"
+
+@using IFinancing360_SYS_UI.Components.SysCompanyComponent
+@using IFinancing360_SYS_UI.Components.SysCompanyParamComponent
+
+<Card>
+  <Title Text="Company Info" />
+
+  <SysCompanyForm IDChanged="@((string ID) => { CompanyID = ID; })" />
+
+  @if (CompanyID is not null)
+  {
+    <Divider />
+
+    <Title Text="Company Parameter List" />
+
+    <SysCompanyParamDataGrid CompanyID="@CompanyID" />
+  }
+</Card>
+
+@code {
+  public string? CompanyID { get; set; }
+}

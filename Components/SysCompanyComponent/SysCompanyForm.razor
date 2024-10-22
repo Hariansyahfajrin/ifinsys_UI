@@ -1,0 +1,27 @@
+<!-- #region Form -->
+<RadzenTemplateForm TItem="SysCompanyModel" Data="@row" Submit=@OnSubmit>
+	<RadzenStack>
+		<!-- #region Toolbar -->
+		<RadzenRow Gap="8">
+			<RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+		</RadzenRow>
+		<!-- #endregion -->
+
+		<RadzenStack>
+			<RadzenRow>
+				<!-- #region Code -->
+				<FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Disabled Max="50" />
+				<!-- #endregion -->
+
+				<!-- #region Name -->
+				<FormFieldTextBox Label="Name" Name="Name" @bind-Value="@row.Name" Max="4000" Required="true" />
+				<!-- #endregion -->
+
+				<!-- #region IDPP -->
+				<FormFieldTextBox Name="IDPP" Label="ID PP" @bind-Value="@row.IDPP" Required="true" />
+				<!-- #endregion -->
+			</RadzenRow>
+		</RadzenStack>
+	</RadzenStack>
+</RadzenTemplateForm>
+<!-- #endregion -->

@@ -1,0 +1,26 @@
+<RadzenStack>
+  <RadzenStack>
+    <!-- #region Toolbar -->
+    <RadzenRow Gap="8">
+      <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+    </RadzenRow>
+    <!-- #endregion -->
+
+    <!-- #region List Data -->
+    <DataGrid ID="BranchDataGrid" @ref=@dataGrid TItem="SysBranchBankModel" LoadData="LoadData" AllowSelected="false">
+      <DataGridColumn TItem="SysBranchBankModel" Property="BankDescription" Title="Bank" Width="20%"
+        Link="@(row => $"/companyinformation/branch/{BranchID}/branchbank/{row.ID}")" TextAlign="TextAlign.Center" />
+      <DataGridColumn TItem="SysBranchBankModel" Property="BankAccountNo" Title="Bank Account No" />
+      <DataGridColumn TItem="SysBranchBankModel" Property="BankAccountName" Title="Bank Account Name" />
+      <DataGridColumn TItem="SysBranchBankModel" Property="TypeFlag" Title="Flag" Text="@((row) => 
+           row.TypeFlag switch {
+            "B" => "BANK",
+            "C" => "CASH",
+            _ => "OPEX"
+          }
+        )" TextAlign="TextAlign.Center" />
+      <DataGridColumn TItem="SysBranchBankModel" Property="IsActive" Title="Active" FormatString="YN" />
+    </DataGrid>
+    <!-- #endregion -->
+  </RadzenStack>
+</RadzenStack>

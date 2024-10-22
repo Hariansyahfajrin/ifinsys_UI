@@ -1,0 +1,53 @@
+<!-- #region Form -->
+<RadzenTemplateForm TItem="SysEmployeeBranchModel" Data="@row" Submit=@OnSubmit>
+  <RadzenStack>
+    <!-- #region Toolbar -->
+    <RadzenRow Gap="8">
+      <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+      <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+    </RadzenRow>
+    <!-- #endregion -->
+
+    <RadzenStack>
+      <RadzenRow>
+        <!-- #region EmployeeName -->
+        <FormFieldTextBox Label="Employee Name" Name="EmployeeName" @bind-Value="@employeeMain.Name" Disabled />
+        <!-- #endregion -->
+
+        <!-- #region EmployeeNIK -->
+        <FormFieldTextBox Label="Employee NIK" Name="EmployeeNIK" @bind-Value="@employeeMain.NIK" Disabled />
+        <!-- #endregion -->
+      </RadzenRow>
+
+      <RadzenRow>
+        <!-- #region Code -->
+        <FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Max="50" Disabled
+          Placeholder="Auto Generated" />
+        <!-- #endregion -->
+
+        <!-- #region Branch -->
+        <FormFieldButtonLookup Name="BranchID" Label="Branch" Target="branchLookup" @bind-Value="@row.BranchID"
+          @bind-Text="@(row.BranchName)" Required="true" />
+        <!-- #endregion -->
+
+        <!-- #region Is Base -->
+        <FormFieldSwitch Name="IsBase" Label="Base " @bind-Value="@row.IsBase" />
+        <!-- #endregion -->
+      </RadzenRow>
+
+    </RadzenStack>
+  </RadzenStack>
+</RadzenTemplateForm>
+<!-- #endregion -->
+
+<!-- #region Branch Lookup -->
+<SingleSelectLookup ID="EmployeeBranchLookup" @ref="@branchLookup" TItem="SysBranchModel" LoadData="LoadBranchLookup"
+  Title="Branch List" Select="(select) => {
+								row.BranchID = select.ID;
+								row.BranchName = select.Name;
+							}">
+  <DataGridColumn TItem="SysBranchModel" Property="Code" Title="Code" />
+  <DataGridColumn TItem="SysBranchModel" Property="Name" Title="Name" />
+  <DataGridColumn TItem="SysBranchModel" Property="RegionDescription" Title="Region" />
+</SingleSelectLookup>
+<!-- #endregion -->

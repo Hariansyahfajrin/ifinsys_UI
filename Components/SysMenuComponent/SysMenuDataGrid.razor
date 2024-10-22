@@ -1,0 +1,59 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region Filter -->
+  <RadzenRow Gap="8">
+    <!-- #region Module -->
+    <FormFieldButtonLookup Name="ModuleID" Label="Module" Target="moduleLookup" @bind-Value="@filter.ModuleID"
+      @bind-Text="@(filter.ModuleCode)" Required="true" />
+    <!-- #endregion -->
+
+    <!-- #region Parent -->
+    <FormFieldButtonLookup Name="ParentMenuID" Label="Parent" Target="parentLookup" @bind-Value="@filter.ParentMenuID"
+      @bind-Text="@(filter.ParentMenuName)" Required="true" />
+    <!-- #endregion -->
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid @ref=@dataGrid ID="MenuDataGrid" TItem="SysMenuModel" LoadData="LoadData" AllowSelected="false">
+    <!-- #region Column Data -->
+    <DataGridColumn TItem="SysMenuModel" Property="Name" Title="Name" Link="@((row) => $"/systemsetting/menu/{row.ID}")"
+      Width="25%" />
+    <DataGridColumn TItem="SysMenuModel" Property="ModuleName" Title="Module Name" Width="30%" />
+    <DataGridColumn TItem="SysMenuModel" Property="ParentMenuName" Title="Parent Name" Width="30%" />
+    <DataGridColumn TItem="SysMenuModel" Property="IsActive" Title="Active" Width="15%" TextAlign="TextAlign.Center"
+      FormatString="YN" />
+    <!-- #endregion -->
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>
+
+
+<!-- #region Module Lookup -->
+<SingleSelectLookup @ref="@moduleLookup" ID="ModuleLookup" TItem="SysModuleModel" LoadData="LoadModuleLookup"
+  Title="Module List" Select="async (select) => {
+								filter.ModuleID = select.ID;
+								filter.ModuleCode = select.Code;
+								await dataGrid.Reload();
+							}">
+  <DataGridColumn TItem="SysModuleModel" Property="Code" Title="Code" />
+  <DataGridColumn TItem="SysModuleModel" Property="Name" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region Parent Lookup -->
+<SingleSelectLookup @ref="@parentLookup" ID="ParentMenuLookup" TItem="SysMenuModel" LoadData="LoadParentLookup"
+  Title="Parent List" Select="async (select) => {
+								filter.ParentMenuID = select.ID;
+								filter.ParentMenuName = select.Name;
+								await dataGrid.Reload();
+							}">
+  <DataGridColumn TItem="SysMenuModel" Property="Code" Title="Code" />
+  <DataGridColumn TItem="SysMenuModel" Property="Name" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->

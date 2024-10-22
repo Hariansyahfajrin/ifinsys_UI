@@ -1,0 +1,27 @@
+<RadzenStack>
+	<!-- #region Toolbar -->
+	<RadzenRow Gap="8">
+		<RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@(() => groupRoleLookup.Open())" />
+		<RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete" />
+	</RadzenRow>
+	<!-- #endregion -->
+
+	<!-- #region List Data -->
+	<DataGrid ID="SysUserMainGroupSecDataGrid" @ref=@dataGrid TItem="SysUserMainGroupSecModel" LoadData="LoadData"
+		AllowSelected="true">
+		<DataGridColumn TItem="SysUserMainGroupSecModel" Property="RoleGroupName" Title="Description" />
+	</DataGrid>
+	<!-- #endregion -->
+</RadzenStack>
+
+<!-- #region Lookup Add -->
+<MultipleSelectLookup @ref="groupRoleLookup" ID="SysRoleGroupLookup" TItem="SysRoleGroupModel"
+	LoadData="LoadLookupGroupRole" Title="Group Role Lookup">
+	<ToolbarTemplate>
+		<RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+	</ToolbarTemplate>
+	<ColumnsTemplate>
+		<DataGridColumn TItem="SysRoleGroupModel" Property="Name" Title="Description" Width="100%" />
+	</ColumnsTemplate>
+</MultipleSelectLookup>
+<!-- #endregion -->

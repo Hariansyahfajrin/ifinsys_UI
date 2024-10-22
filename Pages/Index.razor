@@ -1,0 +1,21 @@
+﻿@page "/"
+@inject IFINSYSClient IFINSYSClient
+@inject SysBranchService SysBranchService
+@* <FormFieldFileInput Upload="Upload" /> *@
+
+@code {
+  public string Value { get; set; } = "";
+
+  protected override async Task OnInitializedAsync()
+  {
+    @* Loading.Show(); *@
+    await base.OnInitializedAsync();
+    @* throw new NullReferenceException(); *@
+  }
+
+  public async Task Upload(FileRequest file)
+  {
+    file.Path = "IFINSYS";
+    IFINSYSClient.Post("Values", "Upload", file);
+  }
+}

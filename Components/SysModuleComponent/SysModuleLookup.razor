@@ -1,0 +1,20 @@
+@* <!-- #region Module Lookup -->
+<SingleSelectLookup ID="ModuleLookup" @ref=@lookup TItem="SysModuleModel" LoadData="LoadData" Title="Module List"
+Select="(select) => {
+row.ModuleID = select.ID;
+row.Module = select;
+}">
+<DataGridColumn TItem="SysModuleModel" Property="Code" Title="Code" />
+<DataGridColumn TItem="SysModuleModel" Property="Name" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+@code {
+[Inject] SysModuleService SysModuleService { get; set; } = default!;
+
+public SingleSelectLookup<SysModuleModel> lookup;
+protected async Task<List<SysModuleModel>?> LoadData(string keyword)
+{
+return await SysModuleService.GetRowsForLookupModule(keyword, 0, 100);
+}
+} *@

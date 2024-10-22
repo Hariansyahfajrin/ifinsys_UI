@@ -1,0 +1,22 @@
+<RadzenStack>
+	<!-- #region Toolbar -->
+	<RadzenRow Gap="8">
+		<RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+		<RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete" />
+	</RadzenRow>
+	<!-- #endregion -->
+
+	<!-- #region List Data -->
+	<DataGrid ID="CurrencyRateDataGrid" @ref=@dataGrid TItem="SysCurrencyRateModel" LoadData="LoadData"
+		AllowSelected="true">
+		<DataGridColumn TItem="SysCurrencyRateModel" Property="EffectiveDate" Title="Effective Date"
+			TextAlign="TextAlign.Center" Link="@(row => $"/commonmasterfile/currency/{CurrencyID}/rate/{row.ID}")" />
+		<DataGridColumn TItem="SysCurrencyRateModel" Property="BuyRate" Title="Buy Rate (%)" Width="25%"
+			TextAlign="TextAlign.Right" FormatString="N6" />
+		<DataGridColumn TItem="SysCurrencyRateModel" Property="SaleBuyMid" Title="Middle Rate (%)" Width="25%"
+			TextAlign="TextAlign.Right" FormatString="N6" />
+		<DataGridColumn TItem="SysCurrencyRateModel" Property="SaleRate" Title="Sale Rate (%)" Width="25%"
+			TextAlign="TextAlign.Right" FormatString="N6" />
+	</DataGrid>
+	<!-- #endregion -->
+</RadzenStack>

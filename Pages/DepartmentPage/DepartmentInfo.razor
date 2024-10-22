@@ -1,0 +1,13 @@
+@page "/companyinformation/department/add"
+@page "/companyinformation/department/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysDepartmentComponent
+<Card>
+	<Title Text="Department Info" />
+
+	<SysDepartmentForm ID="@ID" />
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}

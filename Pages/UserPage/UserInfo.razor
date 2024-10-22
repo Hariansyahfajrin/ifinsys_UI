@@ -1,0 +1,33 @@
+@* @page "/systemsecurity/user/add" *@
+@page "/systemsecurity/user/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysUserMainComponent
+@using IFinancing360_SYS_UI.Components.SysUserMainGroupSecComponent
+@using IFinancing360_SYS_UI.Components.SysUserMainRoleSecComponent
+@using IFinancing360_SYS_UI.Components.SysUserLoginLogComponent
+<Card>
+	<Title Text="User Info" />
+
+	<SysUserMainForm ID="@ID" />
+
+	@if (ID != null)
+	{
+		<RadzenTabs>
+			<Tabs>
+				<RadzenTabsItem Text="Group">
+					<SysUserMainGroupSecDataGrid UserID=@ID />
+				</RadzenTabsItem>
+				<RadzenTabsItem Text="Role">
+					<SysUserMainRoleSecDataGrid UserID=@ID />
+				</RadzenTabsItem>
+				<RadzenTabsItem Text="Login Log">
+					<SysUserLoginLogDataGrid UserID=@ID />
+				</RadzenTabsItem>
+			</Tabs>
+		</RadzenTabs>
+	}
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}

@@ -1,0 +1,16 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="EmployeeDataGrid" @ref=@dataGrid TItem="SysEmployeeMainModel" LoadData="LoadData" AllowSelected="false">
+    <DataGridColumn TItem="SysEmployeeMainModel" Property="NIK" Title="NIK"
+      Link="@(row => $"/companyinformation/employee/{row.ID}")" />
+    <DataGridColumn TItem="SysEmployeeMainModel" Property="Name" Title="Name" />
+    <DataGridColumn TItem="SysEmployeeMainModel" Property="IsActive" Title="Active" Width="20%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

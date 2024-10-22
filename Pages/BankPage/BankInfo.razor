@@ -1,0 +1,13 @@
+@page "/commonmasterfile/bank/add"
+@page "/commonmasterfile/bank/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysBankComponent
+<Card>
+	<Title Text="Bank Info" />
+
+	<SysBankForm ID="@ID" />
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}

@@ -1,0 +1,13 @@
+@page "/companyinformation/areabranch/add"
+@page "/companyinformation/areabranch/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysRegionComponent
+<Card>
+	<Title Text="Area Branch Info" />
+
+	<SysRegionForm ID=@ID />
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}

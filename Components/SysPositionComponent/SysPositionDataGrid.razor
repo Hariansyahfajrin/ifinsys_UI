@@ -1,0 +1,16 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+    @* <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete" /> *@
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="SysPositionDataGrid" @ref=@dataGrid TItem="SysPositionModel" LoadData="LoadData" AllowSelected="false">
+    <DataGridColumn TItem="SysPositionModel" Property="Description" Title="Description"
+      Link="@(row => $"/companyinformation/position/{row.ID}")" />
+    <DataGridColumn TItem="SysPositionModel" Property="IsActive" Title="Active" Width="20%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

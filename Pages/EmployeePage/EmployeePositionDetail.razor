@@ -1,0 +1,15 @@
+@page "/companyinformation/employee/{EmployeeID}/employeeposition/add"
+@page "/companyinformation/employee/{EmployeeID}/employeeposition/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysEmployeePositionComponent
+<Card>
+	<Title Text="Employee Position Info" />
+
+	<SysEmployeePositionForm EmployeeID="@EmployeeID" ID="@ID" />
+
+</Card>
+
+@code {
+	[Parameter] public string? EmployeeID { get; set; }
+	[Parameter] public string? ID { get; set; }
+}

@@ -1,0 +1,176 @@
+<!-- #region Form -->
+  <RadzenTemplateForm TItem="SysEmployeeMainModel" Data="@row" Submit=@OnSubmit>
+    <RadzenStack>
+      <!-- #region Toolbar -->
+      <RadzenRow Gap="8">
+        <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+        @if (ID != null)
+        {
+          <RadzenButton ButtonStyle=@(row.IsActive == 1 ? ButtonStyle.Danger : ButtonStyle.Success) Text=@(row.IsActive ==
+          1 ? "Non Active" : "Active") Click="@ChangeActive" />
+        }
+        <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+      </RadzenRow>
+      <!-- #endregion -->
+
+      <RadzenStack>
+        <RadzenRow>
+          <!-- #region Code -->
+          <FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Max="50" Required="true" Disabled=@(ID !=
+            null) />
+          <!-- #endregion -->
+
+          <!-- #region Name -->
+          <FormFieldTextBox Label="Name" Name="Name" @bind-Value="@row.Name" Max="250" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Is Active -->
+          <FormFieldSwitch Name="IsActive" Label="Active" @bind-Value="@row.IsActive" Disabled />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region NIK -->
+          <FormFieldTextBox Label="NIK" Name="NIK" @bind-Value="@row.NIK" Max="16" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region DateOfBirth -->
+          <FormFieldDatePicker Label="Date Of Birth" Name="DateOfBirth" @bind-Value="@row.DateOfBirth" Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Area Phone No -->
+          <FormFieldContact Label="Phone No" @bind-Value="@row.PhoneNo" @bind-AreaValue="@row.AreaPhoneNo"
+            Required=true />
+          <!-- #endregion -->
+
+          <!-- #region Area Handphone No -->
+          <FormFieldContact Label="Handphone No" @bind-Value="@row.HandphoneNo" @bind-AreaValue="@row.AreaHandphoneNo"
+            Required=true />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Department -->
+          <FormFieldButtonLookup Name="DepartmentID" Label="Department" Target="departmentLookup"
+            @bind-Value="@row.DepartmentID" @bind-Text="@row.DepartmentDescription" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Head Employee -->
+          <FormFieldButtonLookup Name="HeadEmployeeID" Label="Head" Target="employeeLookup"
+            @bind-Value="@row.HeadEmployeeID" @bind-Text="@row.HeadEmployeeName" />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Province -->
+          <FormFieldButtonLookup Name="ProvinceID" Label="Province" Target="provinceLookup"
+            @bind-Value="@row.ProvinceID" @bind-Text="@row.ProvinceDescription" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region City -->
+          <FormFieldButtonLookup Name="CityID" Label="City" Target="cityLookup" @bind-Value="@row.CityID"
+            @bind-Text="@row.CityDescription" Required="true" Disabled=@(row.ProvinceID == null) />
+          <!-- #endregion -->
+
+          <!-- #region Zip Code -->
+          <FormFieldButtonLookup Name="ZipCodeID" Label="Zip Code" Target="zipCodeLookup" @bind-Value="@row.ZipCodeID"
+            @bind-Text="@row.ZipCodePostalCode" Required="true" Disabled=@(row.ProvinceID == null || row.CityID == null) />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region SubDistrict -->
+          <FormFieldTextBox Label="Sub District" Name="SubDistrict" @bind-Value="@row.SubDistrict" Max="250"
+            Disabled=true />
+          <!-- #endregion -->
+
+          <!-- #region Village -->
+          <FormFieldTextBox Label="Village" Name="Village" @bind-Value="@row.Village" Max="250" Disabled=true />
+          <!-- #endregion -->
+
+          <!-- #region Address -->
+          <FormFieldTextArea Label="Address" Name="Address" @bind-Value="@row.Address" Max="400" Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Email -->
+          <FormFieldTextBox Label="Email" Name="Email" @bind-Value="@row.Email" Max="200" Required />
+          <!-- #endregion -->
+
+          <!-- #region OtherEmail -->
+          <FormFieldTextBox Label="Other Email" Name="OtherEmail" @bind-Value="@row.OtherEmail" Max="200" />
+          <!-- #endregion -->
+
+          <!-- #region PersonalInfo -->
+          <FormFieldTextArea Label="Personal Info" Name="PersonalInfo" @bind-Value="@row.PersonalInfo" Max="400"
+            Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+      </RadzenStack>
+    </RadzenStack>
+  </RadzenTemplateForm>
+  <!-- #endregion -->
+
+  
+
+<!-- #region Department Lookup -->
+<SingleSelectLookup ID="DepartmentLookup" @ref="@departmentLookup" TItem="SysDepartmentModel"
+  LoadData="LoadDepartmentLookup" Title="Department List" Select="(select) => {
+								row.DepartmentID = select.ID;
+								row.DepartmentDescription = select.Description;
+							}">
+  <DataGridColumn TItem="SysDepartmentModel" Property="Code" Title="Code" />
+  <DataGridColumn TItem="SysDepartmentModel" Property="Description" Title="Description" />
+  <DataGridColumn TItem="SysDepartmentModel" Property="DivisionDescription" Title="Division" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region EmployeeMain Lookup -->
+<SingleSelectLookup ID="EmployeeLookup" @ref="@employeeLookup" TItem="SysEmployeeMainModel"
+  LoadData="LoadEmployeeMainLookup" Title="Employee List" Select="(select) => {
+								row.HeadEmployeeID = select.ID;
+								row.HeadEmployeeName = select.Name;
+							}">
+  <DataGridColumn TItem="SysEmployeeMainModel" Property="Code" Title="Code" />
+  <DataGridColumn TItem="SysEmployeeMainModel" Property="Name" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region Province Lookup -->
+<SingleSelectLookup ID="ProvinceLookup" @ref="@provinceLookup" TItem="SysProvinceModel" LoadData="LoadProvinceLookup"
+  Title="Province List" Select="(select) => {
+row.ProvinceID = select.ID;
+row.ProvinceDescription = select.Description;
+}">
+  <DataGridColumn TItem="SysProvinceModel" Property="Code" Title="Code" />
+  <DataGridColumn TItem="SysProvinceModel" Property="Description" Title="Description" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region City Lookup -->
+<SingleSelectLookup ID="CityLookup" @ref="@cityLookup" TItem="SysCityModel" LoadData="LoadCityLookup" Title="City List"
+  Select="(select) => {
+row.CityID = select.ID;
+row.CityDescription = select.Description;
+}">
+  <DataGridColumn TItem="SysCityModel" Property="Code" Title="Code" />
+  <DataGridColumn TItem="SysCityModel" Property="Description" Title="Description" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region Zip Code Lookup -->
+<SingleSelectLookup ID="ZipCodeLookup" @ref="@zipCodeLookup" TItem="SysZipCodeModel" LoadData="LoadZipCodeLookup"
+  Title="Zip Code List" Select="(select) => {
+row.ZipCodeID = select.ID;
+row.ZipCodePostalCode = select.PostalCode;
+row.SubDistrict = select.SubDistrict;
+row.Village = select.Village;
+}">
+  <DataGridColumn TItem="SysZipCodeModel" Property="PostalCode" Title="Postal Code" />
+  <DataGridColumn TItem="SysZipCodeModel" Property="SubDistrict" Title="Sub District" />
+  <DataGridColumn TItem="SysZipCodeModel" Property="Village" Title="Village" />
+</SingleSelectLookup>
+<!-- #endregion -->

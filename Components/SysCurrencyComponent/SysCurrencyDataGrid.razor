@@ -1,0 +1,18 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="CurrencyDataGrid" @ref=@dataGrid TItem="SysCurrencyModel" LoadData="LoadData" AllowSelected="false">
+    <DataGridColumn TItem="SysCurrencyModel" Property="Code" Title="Code" Width="20%" TextAlign="TextAlign.Center"
+      Link="@(row => $"/commonmasterfile/currency/{row.ID}")" />
+    <DataGridColumn TItem="SysCurrencyModel" Property="Description" Title="Description" />
+    <DataGridColumn TItem="SysCurrencyModel" Property="IsBase" Title="Base" Width="20%" TextAlign="TextAlign.Center"
+      FormatString="YN" />
+    <DataGridColumn TItem="SysCurrencyModel" Property="IsActive" Title="Active" Width="20%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

@@ -1,0 +1,46 @@
+@page "/companyinformation/branch/add"
+@page "/companyinformation/branch/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysBranchComponent
+@using IFinancing360_SYS_UI.Components.SysBranchParamComponent
+@using IFinancing360_SYS_UI.Components.SysBranchBankComponent
+@using IFinancing360_SYS_UI.Components.SysEmployeeMainComponent
+@using IFinancing360_SYS_UI.Components.SysBranchDocComponent
+@using IFinancing360_SYS_UI.Components.SysBranchSignerComponent
+@using IFinancing360_SYS_UI.Components.SysBranchLoginComponent
+
+<Card>
+	<Title Text="Branch Info" />
+
+	<SysBranchForm ID="@ID" />
+
+	@if (ID != null)
+	{
+		<RadzenTabs>
+			<Tabs>
+				<RadzenTabsItem Text="Parameter">
+					<SysBranchParamDataGrid BranchID="@ID" />
+				</RadzenTabsItem>
+				<RadzenTabsItem Text="Bank">
+					<SysBranchBankDataGrid BranchID="@ID" />
+				</RadzenTabsItem>
+				<RadzenTabsItem Text="Employee">
+					<BranchEmployeeDataGrid BranchID="@ID" />
+				</RadzenTabsItem>
+				<RadzenTabsItem Text="Document">
+					<SysBranchDocDataGrid BranchID="@ID" />
+				</RadzenTabsItem>
+				<RadzenTabsItem Text="Signer">
+					<SysBranchSignerDataGrid BranchID="@ID" />
+				</RadzenTabsItem>
+				<RadzenTabsItem Text="Login">
+					<SysBranchLoginForm BranchID="@ID" />
+				</RadzenTabsItem>
+			</Tabs>
+		</RadzenTabs>
+	}
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}

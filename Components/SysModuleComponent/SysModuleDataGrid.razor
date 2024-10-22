@@ -1,0 +1,21 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    @* <RoleAccess Code="RA0000001"> *@
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+    @* </RoleAccess> *@
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="ModuleDataGrid" @ref=@dataGrid TItem="SysModuleModel" LoadData="LoadData" AllowSelected="false">
+    <DataGridColumn TItem="SysModuleModel" Property="Code" Title="Code"
+      Link="@((row) => $"/systemsetting/module/{row.ID}")" Width="15%" />
+    <DataGridColumn TItem="SysModuleModel" Property="Name" Title="Name" Width="25%" />
+    <DataGridColumn TItem="SysModuleModel" Property="IP" Title="IP" Width="15%" />
+    <DataGridColumn TItem="SysModuleModel" Property="Colour" Title="Colour" Width="15%" />
+    <DataGridColumn TItem="SysModuleModel" Property="Icon" Title="Icon" Width="15%" />
+    <DataGridColumn TItem="SysModuleModel" Property="IsActive" Title="Active" Width="15%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

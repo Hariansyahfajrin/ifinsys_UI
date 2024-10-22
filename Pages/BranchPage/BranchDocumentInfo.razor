@@ -1,0 +1,14 @@
+@page "/companyinformation/branch/{BranchID}/branchdoc/add"
+@page "/companyinformation/branch/{BranchID}/branchdoc/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysBranchDocComponent
+<Card>
+	<Title Text="Branch Document Info" />
+
+	<SysBranchDocForm ID="@ID" BranchID=@BranchID />
+</Card>
+
+@code {
+	[Parameter] public string? BranchID { get; set; }
+	[Parameter] public string? ID { get; set; }
+}

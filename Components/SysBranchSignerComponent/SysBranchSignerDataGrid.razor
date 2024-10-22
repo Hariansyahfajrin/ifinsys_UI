@@ -1,0 +1,19 @@
+<RadzenStack>
+  <RadzenStack>
+    <!-- #region Toolbar -->
+    <RadzenRow Gap="8">
+      <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+      <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete"  />
+    </RadzenRow>
+    <!-- #endregion -->
+
+    <!-- #region List Data -->
+    <DataGrid ID="BranchDataGrid" @ref=@dataGrid TItem="SysBranchSignerModel" LoadData="LoadData" AllowSelected="true">
+      <DataGridColumn TItem="SysBranchSignerModel" Property="SignerTypeDescription" Title="Type"
+        Link="@(row => $"/companyinformation/branch/{BranchID}/branchsigner/{row.ID}")" />
+      <DataGridColumn TItem="SysBranchSignerModel" Property="SignerName" Title="Name" Width="20%" />
+      <DataGridColumn TItem="SysBranchSignerModel" Property="SignerKTPNo" Title="Signer ID No" Width="20%" />
+    </DataGrid>
+    <!-- #endregion -->
+  </RadzenStack>
+</RadzenStack>

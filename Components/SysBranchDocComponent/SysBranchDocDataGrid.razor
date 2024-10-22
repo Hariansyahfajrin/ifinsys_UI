@@ -1,0 +1,20 @@
+<RadzenStack>
+  <RadzenStack>
+    <!-- #region Toolbar -->
+    <RadzenRow Gap="8">
+      <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+      <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete"  />
+    </RadzenRow>
+    <!-- #endregion -->
+
+    <!-- #region List Data -->
+    <DataGrid ID="BranchDataGrid" @ref=@dataGrid TItem="SysBranchDocModel" LoadData="LoadData" AllowSelected="true">
+      <DataGridColumn TItem="SysBranchDocModel" Property="DocumentType" Title="Document Type"
+        Link="@(row => $"/companyinformation/branch/{BranchID}/branchdoc/{row.ID}")" />
+      <DataGridColumn TItem="SysBranchDocModel" Property="DocumentNo" Title="Document No" Width="20%" />
+      <DataGridColumn TItem="SysBranchDocModel" Property="ExpiredDate" Title="Expired Date" Width="20%" />
+      <DataGridColumn TItem="SysBranchDocModel" Property="EffectiveDate" Title="Effective Date" Width="20%" />
+    </DataGrid>
+    <!-- #endregion -->
+  </RadzenStack>
+</RadzenStack>

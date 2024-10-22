@@ -1,0 +1,54 @@
+<!-- #region Form -->
+  <RadzenTemplateForm TItem="SysBranchLoginModel" Data="@row" Submit=@OnSubmit>
+    <RadzenStack>
+      <!-- #region Toolbar -->
+      <RadzenRow Gap="8">
+        <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+      </RadzenRow>
+      <!-- #endregion -->
+
+      <RadzenStack>
+        <RadzenRow>
+          <FormFieldSwitch Name="IsMonday" Label="Monday" @bind-Value="@row.IsMonday" />
+          <FormFieldTimePicker Label="Min" Name="DateInMonday" @bind-Value="@row.DateInMonday" Required=true />
+          <FormFieldTimePicker Label="Max" Name="DateOutMonday" @bind-Value="@row.DateOutMonday" Required=true />
+        </RadzenRow>
+        <RadzenRow>
+          <FormFieldSwitch Name="IsTuesday" Label="Tuesday" @bind-Value="@row.IsTuesday" />
+          <FormFieldTimePicker Label="Min" Name="DateInTuesday" @bind-Value="@row.DateInTuesday" Required=true />
+          <FormFieldTimePicker Label="Max" Name="DateOutTuesday" @bind-Value="@row.DateOutTuesday" Required=true />
+        </RadzenRow>
+        <RadzenRow>
+          <FormFieldSwitch Name="IsWednesday" Label="Wednesday" @bind-Value="@row.IsWednesday" />
+          <FormFieldTimePicker Label="Min" Name="DateInWednesday" @bind-Value="@row.DateInWednesday" Required=true />
+          <FormFieldTimePicker Label="Max" Name="DateOutWednesday" @bind-Value="@row.DateOutWednesday" Required=true />
+        </RadzenRow>
+        <RadzenRow>
+          <FormFieldSwitch Name="IsThursday" Label="Thursday" @bind-Value="@row.IsThursday" />
+          <FormFieldTimePicker Label="Min" Name="DateInThursday" @bind-Value="@row.DateInThursday" Required=true />
+          <FormFieldTimePicker Label="Max" Name="DateOutThursday" @bind-Value="@row.DateOutThursday" Required=true />
+        </RadzenRow>
+        <RadzenRow>
+          <FormFieldSwitch Name="IsFriday" Label="Friday" @bind-Value="@row.IsFriday" />
+          <FormFieldTimePicker Label="Min" Name="DateInFriday" @bind-Value="@row.DateInFriday" Required=true />
+          <FormFieldTimePicker Label="Max" Name="DateOutFriday" @bind-Value="@row.DateOutFriday" Required=true />
+        </RadzenRow>
+        <RadzenRow>
+          <FormFieldSwitch Name="IsSaturday" Label="Saturday" @bind-Value="@row.IsSaturday" />
+          <FormFieldTimePicker Label="Min" Name="DateInSaturday" @bind-Value="@row.DateInSaturday" Required=true />
+          <FormFieldTimePicker Label="Max" Name="DateOutSaturday" @bind-Value="@row.DateOutSaturday" Required=true />
+        </RadzenRow>
+        <RadzenRow>
+          <FormFieldSwitch Name="IsSunday" Label="Sunday" @bind-Value="@row.IsSunday" />
+          <FormFieldTimePicker Label="Min" Name="DateInSunday" @bind-Value="@row.DateInSunday" Required=true />
+          <FormFieldTimePicker Label="Max" Name="DateOutSunday" @bind-Value="@row.DateOutSunday" Required=true />
+        </RadzenRow>
+        <RadzenRow>
+          <FormFieldSwitch Name="IsHoliday" Label="Holiday" @bind-Value="@row.IsHoliday" />
+          <FormFieldTimePicker Label="Min" Name="DateInHoliday" @bind-Value="@row.DateInHoliday" Required=true />
+          <FormFieldTimePicker Label="Max" Name="DateOutHoliday" @bind-Value="@row.DateOutHoliday" Required=true />
+        </RadzenRow>
+      </RadzenStack>
+    </RadzenStack>
+  </RadzenTemplateForm>
+  <!-- #endregion -->

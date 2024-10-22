@@ -1,0 +1,16 @@
+@page "/companyinformation/branch/{BranchID}/branchsigner/add"
+@page "/companyinformation/branch/{BranchID}/branchsigner/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysBranchSignerComponent
+
+<Card>
+  <Title Text="Branch Signer Info" />
+
+	<SysBranchSignerForm BranchID="@BranchID" ID="@ID" />
+</Card>
+
+@code {
+	[Parameter] public string? BranchID { get; set; }
+	[Parameter] public string? ID { get; set; }
+}
+

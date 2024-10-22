@@ -1,0 +1,14 @@
+@page "/systemsetting/generalcode/{GeneralCodeID}/generalsubcode/add"
+@page "/systemsetting/generalcode/{GeneralCodeID}/generalsubcode/{ID}"
+@using IFinancing360_SYS_UI.Components.SysGeneralSubcodeComponent
+
+<Card>
+  <Title Text="Sub General Code Info" />
+
+  <SysGeneralSubcodeForm ID=@ID GeneralCodeID="@GeneralCodeID" />
+</Card>
+
+@code {
+  [Parameter] public string? GeneralCodeID { get; set; }
+  [Parameter] public string? ID { get; set; }
+}

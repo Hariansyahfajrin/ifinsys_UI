@@ -1,0 +1,14 @@
+<RadzenStack>
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+    <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete"  />
+  </RadzenRow>
+
+  <DataGrid ID="MenuRoleDataGrid" @ref=@dataGrid TItem="SysMenuRoleModel" LoadData="LoadData" AllowSelected=true>
+    <DataGridColumn TItem="SysMenuRoleModel" Property="Code" Title="Code" TextAlign="TextAlign.Center" Width="15%"
+      Link="@((row => $"/systemsetting/menu/{MenuID}/menurole/{row.ID}"))" />
+    <DataGridColumn TItem="SysMenuRoleModel" Property="Name" Title="Name" />
+    <DataGridColumn TItem="SysMenuRoleModel" Property="RoleAccess" Title="Role Access" TextAlign="TextAlign.Center"
+      Text="@((row) => roleAccess.Where(x => x.Value == row.RoleAccess).FirstOrDefault().Key)" Width="20%" />
+  </DataGrid>
+</RadzenStack>

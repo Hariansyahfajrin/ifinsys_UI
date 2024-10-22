@@ -1,0 +1,59 @@
+<!-- #region Form -->
+  <RadzenTemplateForm TItem="SysModuleModel" Data="@row" Submit=@OnSubmit>
+    <RadzenStack>
+      <!-- #region Toolbar -->
+      <RadzenRow Gap="8">
+        <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+        @if (ID != null)
+        {
+          <RadzenButton ButtonStyle=@(row.IsActive == 1 ? ButtonStyle.Danger : ButtonStyle.Success) Text=@(row.IsActive ==
+          1 ? "Non Active" : "Active") Click="@ChangeActive" />
+        }
+        <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+      </RadzenRow>
+      <!-- #endregion -->
+
+      <RadzenStack>
+        <RadzenRow>
+          <!-- #region Code -->
+          <FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Disabled="@(ID != null)" Max="50"
+            Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Name -->
+          <FormFieldTextBox Label="Name" Name="Name" @bind-Value="@row.Name" Max="50" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Is Active -->
+          <FormFieldSwitch Name="IsActive" Label="Active" @bind-Value="@row.IsActive" Disabled />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region IP -->
+          <FormFieldTextBox Label="IP" Name="IP" @bind-Value="@row.IP" Max="50" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Colour -->
+          <FormFieldTextBox Label="Colour" Name="Colour" @bind-Value="@row.Colour" Max="50" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Icon -->
+          <FormFieldTextBox Label="Icon" Name="Icon" @bind-Value="@row.Icon" Max="50" Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region OrderKey -->
+          <FormFieldNumeric Label="Order" Name="OrderKey" @bind-Value="@row.OrderKey" Required="true" Min="1" />
+          <!-- #endregion -->
+
+          <!-- #region ServerIPAddress -->
+          <FormFieldTextBox Label="Server IP Address" Name="ServerIPAddress" @bind-Value="@row.ServerIPAddress" Max="50"
+            Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+      </RadzenStack>
+    </RadzenStack>
+  </RadzenTemplateForm>
+  <!-- #endregion -->

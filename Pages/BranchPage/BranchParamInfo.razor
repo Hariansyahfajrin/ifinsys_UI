@@ -1,0 +1,15 @@
+@page "/companyinformation/branch/{BranchID}/branchparam/add"
+@page "/companyinformation/branch/{BranchID}/branchparam/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysBranchParamComponent
+
+<Card>
+  <Title Text="Branch Parameter Info" />
+
+  <SysBranchParamForm ID=@ID BranchID=@BranchID />
+</Card>
+
+@code {
+  [Parameter] public string? ID { get; set; }
+  [Parameter] public string? BranchID { get; set; }
+}

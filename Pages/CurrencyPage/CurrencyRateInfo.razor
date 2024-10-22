@@ -1,0 +1,16 @@
+@page "/commonmasterfile/currency/{CurrencyID}/rate/add"
+@page "/commonmasterfile/currency/{CurrencyID}/rate/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysCurrencyRateComponent
+
+<Card>
+	<Title Text="Currency Rate Info" />
+
+	<SysCurrencyRateForm ID="@ID" CurrencyID="@CurrencyID" />
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+	[Parameter] public string? CurrencyID { get; set; }
+
+}

@@ -1,0 +1,39 @@
+<RadzenTemplateForm TItem="SysMenuRoleModel" Data="@row" Submit=@OnSubmit>
+  <RadzenStack>
+    <RadzenRow Gap="8">
+      <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+      <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+    </RadzenRow>
+
+    <RadzenStack>
+      @if (rowMenu != null)
+      {
+        <RadzenRow>
+          <!-- #region Menu Code -->
+          <FormFieldTextBox Label="Menu Code" Name="MenuCode" @bind-Value="@rowMenu.Code" Max="50" Disabled="true" />
+          <!-- #endregion -->
+
+          <!-- #region Menu Name -->
+          <FormFieldTextBox Label="Menu Name" Name="MenuName" @bind-Value="@rowMenu.Name" Max="50" Disabled="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+
+      }
+
+      <RadzenRow>
+        <!-- #region Code -->
+        <FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Max="50" Disabled="true" />
+        <!-- #endregion -->
+
+        <!-- #region Name -->
+        <FormFieldTextBox Label="Name" Name="Name" @bind-Value="@row.Name" Max="250" Required="true" />
+        <!-- #endregion -->
+
+        <!-- #region RoleAccess -->
+        <FormFieldDropdown TValue="string" Label="Access" Name="RoleAccess" Items="@roleAccess"
+          @bind-Value="@row.RoleAccess" Required="true" />
+        <!-- #endregion -->
+      </RadzenRow>
+    </RadzenStack>
+  </RadzenStack>
+</RadzenTemplateForm>

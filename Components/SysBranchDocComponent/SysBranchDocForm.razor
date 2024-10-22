@@ -1,0 +1,60 @@
+<!-- #region Form -->
+<RadzenTemplateForm TItem="SysBranchDocModel" Data="@row" Submit=@OnSubmit>
+  <RadzenStack>
+    <!-- #region Toolbar -->
+    <RadzenRow Gap="8">
+      <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+      <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+    </RadzenRow>
+    <!-- #endregion -->
+
+    <RadzenStack>
+      <RadzenRow>
+        <!-- #region BranchCode -->
+        <FormFieldTextBox Label="Branch Code" Name="BranchCode" @bind-Value="@branchRow.Code" Disabled />
+        <!-- #endregion -->
+
+        <!-- #region BranchName -->
+        <FormFieldTextBox Label="Branch Name" Name="BranchName" @bind-Value="@branchRow.Name" Disabled />
+        <!-- #endregion -->
+      </RadzenRow>
+
+      <RadzenRow>
+        <!-- #region DocumentType -->
+        <FormFieldButtonLookup TLookup="SysGeneralSubcodeModel" Target="docTypeLookup" Label="Document Type"
+          Name="DocumentType" @bind-Value="@row.DocumentType" @bind-Text="@row.DocumentTypeDescription"
+          Required="true" />
+        <!-- #endregion -->
+
+        <!-- #region DocumentNo -->
+        <FormFieldTextBox Label="Document No" Name="DocumentNo" @bind-Value="@row.DocumentNo" Max="20"
+          Required="true" />
+        <!-- #endregion -->
+      </RadzenRow>
+      <RadzenRow>
+        <!-- #region EffectiveDate -->
+        <FormFieldDatePicker Label="Effective Date" Name="EffectiveDate" @bind-Value="@row.EffectiveDate"
+          Required="true" />
+        <!-- #endregion -->
+
+        <!-- #region ExpiredDate -->
+        <FormFieldDatePicker Label="Expired Date" Name="ExpiredDate" @bind-Value="@row.ExpiredDate" Required="true" />
+        <!-- #endregion -->
+      </RadzenRow>
+    </RadzenStack>
+  </RadzenStack>
+</RadzenTemplateForm>
+<!-- #endregion -->
+
+
+<!-- #region Document Type (Subcode) -->
+<SingleSelectLookup ID="DocTypeSubcode" @ref="@docTypeLookup" TItem="SysGeneralSubcodeModel"
+  LoadData="LoadDocTypeLookup" Title="Document Type List" Select="(select) => {
+row.DocumentType = select.Code;
+row.DocumentTypeDescription = select.Description;
+}">
+  <DataGridColumn TItem="SysGeneralSubcodeModel" Property="Code" Title="Code" Width="20%"
+    TextAlign="TextAlign.Center" />
+  <DataGridColumn TItem="SysGeneralSubcodeModel" Property="Description" Title="Description" />
+</SingleSelectLookup>
+<!-- #endregion -->

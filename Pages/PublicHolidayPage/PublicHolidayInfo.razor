@@ -1,0 +1,13 @@
+@page "/commonmasterfile/publicholiday/add"
+@page "/commonmasterfile/publicholiday/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysHolidayComponent
+<Card>
+	<Title Text="Public Holiday Info" />
+
+	<SysHolidayForm ID="@ID" />
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}

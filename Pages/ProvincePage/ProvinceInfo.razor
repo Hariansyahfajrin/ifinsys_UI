@@ -1,0 +1,22 @@
+@page "/commonmasterfile/province/add"
+@page "/commonmasterfile/province/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysProvinceComponent
+@using IFinancing360_SYS_UI.Components.SysCityComponent
+<Card>
+	<Title Text="Province Info" />
+
+	<SysProvinceForm ID="@ID" />
+
+	@if (ID != null)
+	{
+		<Divider />
+		<Title Text="City List" />
+
+		<SysCityDataGrid ProvinceID="@ID" />
+	}
+</Card>
+
+@code {
+	[Parameter, EditorRequired] public string? ID { get; set; }
+}

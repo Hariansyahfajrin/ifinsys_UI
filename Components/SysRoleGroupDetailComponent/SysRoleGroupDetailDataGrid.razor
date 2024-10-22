@@ -1,0 +1,34 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@(() => menuRoleLookup.Open())" />
+    <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="SysRoleGroupDetailDataGrid" @ref=@dataGrid TItem="SysRoleGroupDetailModel" LoadData="LoadData"
+    AllowSelected="true">
+    <DataGridColumn TItem="SysRoleGroupDetailModel" Property="RoleCode" Title="Code" Width="20%"
+      TextAlign="TextAlign.Center" />
+    <DataGridColumn TItem="SysRoleGroupDetailModel" Property="RoleName" Title="Name" Width="20%" />
+    <DataGridColumn TItem="SysRoleGroupDetailModel" Property="ModuleName" Title="Name" Width="20%" />
+    <DataGridColumn TItem="SysRoleGroupDetailModel" Property="MenuName" Title="Menu Name" Width="20%" />
+    <DataGridColumn TItem="SysRoleGroupDetailModel" Property="SubMenuName" Title="Sub Menu Name" Width="20%" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>
+
+
+<!-- #region Lookup Add -->
+<MultipleSelectLookup @ref="menuRoleLookup" ID="SysMenuRoleLookup" TItem="SysMenuRoleModel"
+  LoadData="LoadLookupMenuRole" Title="Menu Group Role List">
+  <ToolbarTemplate>
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </ToolbarTemplate>
+  <ColumnsTemplate>
+    <DataGridColumn TItem="SysMenuRoleModel" Property="Code" Title="Code" Width="25%" />
+    <DataGridColumn TItem="SysMenuRoleModel" Property="Name" Title="Name" Width="75%" />
+  </ColumnsTemplate>
+</MultipleSelectLookup>
+<!-- #endregion -->

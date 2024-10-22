@@ -1,0 +1,14 @@
+@page "/systemsetting/module/add"
+@page "/systemsetting/module/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysModuleComponent
+
+<Card>
+  <Title Text="Module Info" />
+
+  <SysModuleForm ID="@ID" />
+</Card>
+
+@code {
+  [Parameter, EditorRequired] public string? ID { get; set; }
+}

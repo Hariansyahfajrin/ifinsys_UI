@@ -1,0 +1,14 @@
+@page "/commonmasterfile/zipcode/add"
+@page "/commonmasterfile/zipcode/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysZipCodeComponent
+<Card>
+	<Title Text="Zip Code Info" />
+
+<SysZipCodeForm ID="@ID" />
+	
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}

@@ -1,0 +1,14 @@
+@page "/systemsetting/gllink/add"
+@page "/systemsetting/gllink/{ID}"
+
+@using IFinancing360_SYS_UI.Components.JournalGLLinkComponent
+
+<Card>
+	<Title Text="GL Link Info" />
+
+	<JournalGLLinkForm ID="@ID" />
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}

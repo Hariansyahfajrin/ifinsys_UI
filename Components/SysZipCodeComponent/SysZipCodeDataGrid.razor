@@ -1,0 +1,21 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+    @* <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete" /> *@
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid @ref=@dataGrid ID="ZipCodeDataGrid" TItem="SysZipCodeModel" LoadData="LoadData" AllowSelected="false">
+    <DataGridColumn TItem="SysZipCodeModel" Property="PostalCode" Title="Postal Code" Width="20%">
+      <Template Context="row">
+        <RadzenLink Path="@("/commonmasterfile/zipcode/" + row.ID)" Text="@row.PostalCode" />
+      </Template>
+    </DataGridColumn>
+    <DataGridColumn TItem="SysZipCodeModel" Property="Name" Title="Name" />
+    <DataGridColumn TItem="SysZipCodeModel" Property="IsActive" Title="Active" Width="20%" TextAlign="TextAlign.Center"
+      FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

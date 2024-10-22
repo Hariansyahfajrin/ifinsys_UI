@@ -1,0 +1,13 @@
+@page "/companyinformation/division/add"
+@page "/companyinformation/division/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysDivisionComponent
+
+<Card>
+  <Title Text="Division Info" />
+
+  <SysDivisionForm ID=@ID />
+</Card>
+@code {
+  [Parameter] public string? ID { get; set; }
+}

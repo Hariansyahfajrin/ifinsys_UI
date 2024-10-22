@@ -1,0 +1,76 @@
+<!-- #region Form -->
+	<RadzenTemplateForm TItem="SysZipCodeModel" Data="@row" Submit=@OnSubmit>
+		<RadzenStack>
+			<!-- #region Toolbar -->
+			<RadzenRow Gap="8">
+				<RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+				@if (ID != null)
+				{
+					<RadzenButton ButtonStyle=@(row.IsActive == 1 ? ButtonStyle.Danger : ButtonStyle.Success) Text=@(row.IsActive ==
+					1 ? "Non Active" : "Active") Click="@ChangeActive" />
+				}
+				<RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+			</RadzenRow>
+			<!-- #endregion -->
+
+			<RadzenStack>
+				<RadzenRow>
+					<!-- #region PostalCode -->
+					<FormFieldTextBox Label="Postal Code" Name="PostalCode" @bind-Value="@row.PostalCode" Required=true Max="5" />
+					<!-- #endregion -->
+
+					<!-- #region Name -->
+					<FormFieldTextArea Label="Name" Name="Name" @bind-Value="@row.Name" Max="250" Required="true" />
+					<!-- #endregion -->
+
+					<!-- #region Is Active -->
+					<FormFieldSwitch Name="IsActive" Label="Active" @bind-Value="@row.IsActive" Disabled />
+					<!-- #endregion -->
+				</RadzenRow>
+
+				<RadzenRow>
+					<!-- #region Village -->
+					<FormFieldTextBox Label="Village" Name="Village" @bind-Value="@row.Village" Required=true Max="250" />
+					<!-- #endregion -->
+
+					<!-- #region SubDistrict -->
+					<FormFieldTextBox Label="Sub District" Name="SubDistrict" @bind-Value="@row.SubDistrict" Required=true
+						Max="250" />
+					<!-- #endregion -->
+
+					<!-- #region Province -->
+					<FormFieldButtonLookup Name="ProvinceID" Label="Province" Target="provinceLookup"
+						@bind-Value="@row.ProvinceID" Text="@row.ProvinceDescription" Required="true" />
+					<!-- #endregion -->
+
+					<!-- #region City -->
+					<FormFieldButtonLookup Name="CityID" Label="City" Target="cityLookup" @bind-Value="@row.CityID"
+						@bind-Text="@row.CityDescription" Required="true" Disabled=@(row.ProvinceID == null) />
+					<!-- #endregion -->
+				</RadzenRow>
+			</RadzenStack>
+		</RadzenStack>
+	</RadzenTemplateForm>
+	<!-- #endregion -->
+
+	
+<!-- #region Province Lookup -->
+<SingleSelectLookup @ref="@provinceLookup" ID="ProvinceLookup" TItem="SysProvinceModel" LoadData="LoadProvinceLookup" Title="Province List"
+	Select="(select) => {
+								row.ProvinceID = select.ID;
+								row.ProvinceDescription = select.Description;
+							}">
+	<DataGridColumn TItem="SysProvinceModel" Property="Code" Title="Code" Width="20%" />
+	<DataGridColumn TItem="SysProvinceModel" Property="Description" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region City Lookup -->
+<SingleSelectLookup @ref="@cityLookup" ID="CityLookup" TItem="SysCityModel" LoadData="LoadCityLookup" Title="City List" Select="(select) => {
+								row.CityID = select.ID;
+								row.CityDescription = select.Description;
+							}">
+	<DataGridColumn TItem="SysCityModel" Property="Code" Title="Code" Width="20%" />
+	<DataGridColumn TItem="SysCityModel" Property="Description" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->

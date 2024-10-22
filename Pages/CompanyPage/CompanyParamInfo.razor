@@ -1,0 +1,15 @@
+@page "/companyinformation/company/{CompanyID}/companyparam/add"
+@page "/companyinformation/company/{CompanyID}/companyparam/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysCompanyParamComponent
+
+<Card>
+  <Title Text="Company Parameter Info" />
+
+  <SysCompanyParamForm ID="@ID" CompanyID="@CompanyID" />
+</Card>
+
+@code {
+  [Parameter] public string? ID { get; set; }
+  [Parameter] public string? CompanyID { get; set; }
+}

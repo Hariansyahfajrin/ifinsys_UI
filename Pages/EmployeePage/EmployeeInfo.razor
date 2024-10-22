@@ -1,0 +1,33 @@
+@page "/companyinformation/employee/add"
+@page "/companyinformation/employee/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysEmployeeMainComponent
+@using IFinancing360_SYS_UI.Components.SysEmployeeBranchComponent
+@using IFinancing360_SYS_UI.Components.SysEmployeePositionComponent
+
+<Card>
+	<Title Text="Employee Info" />
+
+	<SysEmployeeMainForm ID="@ID" />
+	@if (ID != null)
+	{
+		<Divider />
+
+
+		<RadzenTabs>
+			<Tabs>
+				<RadzenTabsItem Text="Position">
+					<SysEmployeePositionDataGrid EmployeeID="@ID" />
+				</RadzenTabsItem>
+				<RadzenTabsItem Text="Branch">
+					<SysEmployeeBranchDataGrid EmployeeID="@ID" />
+				</RadzenTabsItem>
+			</Tabs>
+		</RadzenTabs>
+	}
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+	bool ShowTree { get; set; } = true;
+}

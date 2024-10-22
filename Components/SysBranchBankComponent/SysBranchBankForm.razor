@@ -1,0 +1,152 @@
+<!-- #region Form -->
+  <RadzenTemplateForm TItem="SysBranchBankModel" Data="@row" Submit=@OnSubmit>
+    <RadzenStack>
+      <!-- #region Toolbar -->
+      <RadzenRow Gap="8">
+        <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+        @if (ID is not null)
+        {
+          <RadzenButton ButtonStyle=@(row.IsActive == 1 ? ButtonStyle.Danger : ButtonStyle.Success) Text=@(row.IsActive ==
+          1 ? "Non Active" : "Active") Click="@ChangeActive" />
+        }
+        <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+      </RadzenRow>
+      <!-- #endregion -->
+
+      <RadzenStack>
+        <RadzenRow>
+          <!-- #region BranchCode -->
+          <FormFieldTextBox Label="Branch Code" Name="BranchCode" @bind-Value="@branchRow.Code" Disabled />
+          <!-- #endregion -->
+
+          <!-- #region BranchName -->
+          <FormFieldTextBox Label="Branch Name" Name="BranchName" @bind-Value="@branchRow.Name" Disabled />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Code -->
+          <FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Disabled="@(ID != null)" Max="50"
+            Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region BankBranch -->
+          <FormFieldTextBox Label="Bank Branch" Name="BankBranchName" @bind-Value="@row.BankBranchName"
+            Disabled="@(ID != null)" Max="50" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Is Active -->
+          <FormFieldSwitch Name="IsActive" Label="Active" @bind-Value="@row.IsActive" Disabled />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Bank -->
+          <FormFieldButtonLookup TLookup="SysBankModel" Target="@bankLookup" Label="Bank" Name="BankID"
+            @bind-Value="@row.BankID" @bind-Text=@row.BankDescription Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Bank Account No -->
+          <FormFieldTextBox Label="Bank Account No" Name="BankAccountNo" @bind-Value="@row.BankAccountNo"
+            Disabled="@(ID != null)" Max="50" Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Bank Account Name -->
+          <FormFieldTextBox Label="Bank Account Name" Name="BankAccountName" @bind-Value="@row.BankAccountName"
+            Disabled="@(ID != null)" Max="50" Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region EmployeeSignerPDC -->
+          <FormFieldButtonLookup TLookup="SysEmployeeMainModel" Target="@employeeLookup" Label="Signer PDC"
+            Name="EmployeeSignerPDC" @bind-Value="@row.EmployeeSignerPDCID" @bind-Text=@row.EmployeeSignerPDCName
+            Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Currency -->
+          <FormFieldButtonLookup TLookup="SysCurrencyModel" Target="@currencyLookup" Label="Currency" Name="Currency"
+            @bind-Value="@row.CurrencyCode" @bind-Text=@row.CurrencyCode Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region GLLink -->
+          <FormFieldButtonLookup TLookup="JournalGLLinkModel" Target="@glLinkLookup" Label="GL Link" Name="GLLink"
+            @bind-Value="@row.GLLinkID" @bind-Text=@row.GLLinkName />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region BankType -->
+          <FormFieldDropdown TValue="string" Label="Type" Name="BankType" Items=@(typesDdl) @bind-Value=@row.BankType
+            Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region BankType -->
+          <FormFieldDropdown TValue="string" Label="Flag" Name="TypeFlag" Items=@(flagTypesDdl)
+            @bind-Value=@row.TypeFlag Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region DefaultFlag -->
+          <FormFieldSwitch Name="DefaultFlag" Label="Default" @bind-Value="@row.DefaultFlag" />
+          <!-- #endregion -->
+
+          
+        </RadzenRow>
+        <RadzenRow>
+          <!-- #region EDC -->
+          <FormFieldSwitch Name="IsEDC" Label="EDC" @bind-Value="@row.IsEDC" />
+          <!-- #endregion -->
+
+          <!-- #region File Input -->
+          <FormFieldFileInput Label="File" @bind-Value=@(row.FileName)  Upload="Upload" Preview="Preview" Delete="DeleteFile"/>
+          <!-- #endregion -->
+        </RadzenRow>
+      </RadzenStack>
+    </RadzenStack>
+  </RadzenTemplateForm>
+  <!-- #endregion -->
+
+	
+<!-- #region Bank Lookup -->
+<SingleSelectLookup ID="BankLookup" @ref="@bankLookup" TItem="SysBankModel" LoadData="LoadBankLookup" Title="Bank List"
+  Select="(select) => {
+row.BankID = select.ID;
+row.BankDescription = select.Description;
+}">
+  <DataGridColumn TItem="SysBankModel" Property="Code" Title="Code" Width="20%" TextAlign="TextAlign.Center" />
+  <DataGridColumn TItem="SysBankModel" Property="Description" Title="Description" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+
+<!-- #region EmployeeMain Lookup -->
+<SingleSelectLookup ID="EmployeeLookup" @ref="@employeeLookup" TItem="SysEmployeeMainModel"
+  LoadData="LoadEmployeeMainLookup" Title="Employee List" Select="(select) => {
+								row.EmployeeSignerPDCID = select.ID;
+								row.EmployeeSignerPDCName = select.Name;
+							}">
+  <DataGridColumn TItem="SysEmployeeMainModel" Property="Code" Title="Code" Width="20%" TextAlign="TextAlign.Center" />
+  <DataGridColumn TItem="SysEmployeeMainModel" Property="Name" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region Currency Lookup -->
+<SingleSelectLookup ID="CurrencyLookup" @ref="@currencyLookup" TItem="SysCurrencyModel" LoadData="LoadCurrencyLookup"
+  Title="Currency List" Select="(select) => {
+								row.CurrencyCode = select.Code;
+							}">
+  <DataGridColumn TItem="SysCurrencyModel" Property="Code" Title="Code" Width="20%" TextAlign="TextAlign.Center" />
+  <DataGridColumn TItem="SysCurrencyModel" Property="Description" Title="Description" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region GLLink Lookup -->
+<SingleSelectLookup ID="GLLinkLookup" @ref="@glLinkLookup" TItem="JournalGLLinkModel" LoadData="LoadGLLinkLookup"
+  Title="GL Link List" Select="(select) => {
+								row.GLLinkID = select.ID;
+                row.GLLinkName = select.Name;
+							}">
+  <DataGridColumn TItem="JournalGLLinkModel" Property="Code" Title="Code" Width="20%" TextAlign="TextAlign.Center" />
+  <DataGridColumn TItem="JournalGLLinkModel" Property="Name" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->

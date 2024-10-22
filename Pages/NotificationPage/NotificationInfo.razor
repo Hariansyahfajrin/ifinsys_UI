@@ -1,0 +1,14 @@
+@page "/systemsetting/notification/add"
+@page "/systemsetting/notification/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysNotificationComponent
+
+<Card>
+  <Title Text="Notification Info" />
+
+  <SysNotificationForm ID="@ID" />
+</Card>
+
+@code {
+  [Parameter] public string? ID { get; set; }
+}

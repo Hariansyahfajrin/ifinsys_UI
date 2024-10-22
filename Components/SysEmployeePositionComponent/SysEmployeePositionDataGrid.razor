@@ -1,0 +1,18 @@
+<Card>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+    <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="EmployeePositionDataGrid" @ref=@dataGrid TItem="SysEmployeePositionModel" LoadData="LoadData"
+    AllowSelected="true">
+    <DataGridColumn TItem="SysEmployeePositionModel" Property="PositionDescription" Title="Position"
+      Link="@(row => $"/companyinformation/employee/{EmployeeID}/employeeposition/{row.ID}")" />
+    <DataGridColumn TItem="SysEmployeePositionModel" Property="IsBasePosition" Title="Base Position" Width="20%"
+      FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</Card>

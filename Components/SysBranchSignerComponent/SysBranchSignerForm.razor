@@ -1,0 +1,69 @@
+<!-- #region Form -->
+<RadzenTemplateForm TItem="SysBranchSignerModel" Data="@row" Submit=@OnSubmit>
+  <RadzenStack>
+    <!-- #region Toolbar -->
+    <RadzenRow Gap="8">
+      <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+      <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+    </RadzenRow>
+    <!-- #endregion -->
+
+    <RadzenStack>
+      <RadzenRow>
+        <!-- #region BranchCode -->
+        <FormFieldTextBox Label="Branch Code" Name="BranchCode" @bind-Value="@branchRow.Code" Disabled />
+        <!-- #endregion -->
+
+        <!-- #region BranchName -->
+        <FormFieldTextBox Label="Branch Name" Name="BranchName" @bind-Value="@branchRow.Name" Disabled />
+        <!-- #endregion -->
+      </RadzenRow>
+
+      <RadzenRow>
+        <!-- #region SignerType -->
+        <FormFieldButtonLookup TLookup="SysGeneralSubcodeModel" Target="signerTypeLookup" Label="Type" Name="SignerType"
+          @bind-Value="@row.SignerTypeID" @bind-Text="@row.SignerTypeDescription" Required="true" />
+        <!-- #endregion -->
+
+        <!-- #region SignerName -->
+        <FormFieldButtonLookup TLookup="SysEmployeeMainModel" Target="employeeLookup" Label="Name" Name="SignerName"
+          @bind-Value="@row.EmployeeID" @bind-Text="@row.SignerName" Required="true" />
+        <!-- #endregion -->
+
+        <!-- #region SignerIDNo -->
+        <FormFieldTextBox Label="Signer ID No" Name="SignerIDNo" @bind-Value="@row.SignerKTPNo" Max="20"
+          Required="true" />
+        <!-- #endregion -->
+
+        <!-- #region OrderNo -->
+        <FormFieldNumeric Label="Order No" Name="OrderNo" @bind-Value="@row.OrderNo" Required="true" />
+        <!-- #endregion -->
+      </RadzenRow>
+    </RadzenStack>
+  </RadzenStack>
+</RadzenTemplateForm>
+<!-- #endregion -->
+
+<!-- #region Signer Type (Subcode) -->
+<SingleSelectLookup ID="DocTypeSubcode" @ref="@signerTypeLookup" TItem="SysGeneralSubcodeModel"
+  LoadData="LoadSignerTypeLookup" Title="Signer Type List" Select="(select) => {
+row.SignerTypeID = select.ID;
+row.SignerTypeDescription = select.Description;
+}">
+  <DataGridColumn TItem="SysGeneralSubcodeModel" Property="Code" Title="Code" Width="20%"
+    TextAlign="TextAlign.Center" />
+  <DataGridColumn TItem="SysGeneralSubcodeModel" Property="Description" Title="Description" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+
+<!-- #region EmployeeMain Lookup -->
+<SingleSelectLookup ID="EmployeeLookup" @ref="@employeeLookup" TItem="SysEmployeeMainModel"
+  LoadData="LoadEmployeeMainLookup" Title="Employee List" Select="(select) => {
+								row.EmployeeID = select.ID;
+								row.SignerName = select.Name;
+							}">
+  <DataGridColumn TItem="SysEmployeeMainModel" Property="Code" Title="Code" Width="20%" TextAlign="TextAlign.Center" />
+  <DataGridColumn TItem="SysEmployeeMainModel" Property="Name" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->

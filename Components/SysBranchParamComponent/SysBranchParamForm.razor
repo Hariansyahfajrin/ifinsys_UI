@@ -1,0 +1,40 @@
+<!-- #region Form -->
+  <RadzenTemplateForm TItem="SysBranchParamModel" Data="@row" Submit=@OnSubmit>
+    <RadzenStack>
+      <!-- #region Toolbar -->
+      <RadzenRow Gap="8">
+        <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+        <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+      </RadzenRow>
+      <!-- #endregion -->
+
+      <RadzenStack>
+        <RadzenRow>
+          <!-- #region BranchCode -->
+          <FormFieldTextBox Label="Branch Code" Name="BranchCode" @bind-Value="@branchRow.Code" Disabled />
+          <!-- #endregion -->
+
+          <!-- #region BranchName -->
+          <FormFieldTextBox Label="Branch Name" Name="BranchName" @bind-Value="@branchRow.Name" Disabled />
+          <!-- #endregion -->
+        </RadzenRow>
+
+        <RadzenRow>
+          <!-- #region Code -->
+          <FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Disabled="@(ID != null)" Max="50"
+            Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Description -->
+          <FormFieldTextArea Label="Description" Name="Description" @bind-Value="@row.Description" Max="4000"
+            Required="true" />
+          <!-- #endregion -->
+
+          <!-- #region Value -->
+          <FormFieldTextBox Label="Value" Name="Value" @bind-Value="@row.Value" Max="20" Required="true" />
+          <!-- #endregion -->
+        </RadzenRow>
+      </RadzenStack>
+    </RadzenStack>
+  </RadzenTemplateForm>
+  <!-- #endregion -->

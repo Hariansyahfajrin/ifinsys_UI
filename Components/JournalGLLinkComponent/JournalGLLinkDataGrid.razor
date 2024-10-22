@@ -1,0 +1,17 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="JournalGLLinkDataGrid" @ref=@dataGrid TItem="JournalGLLinkModel" LoadData="LoadData"
+    AllowSelected="false">
+    <DataGridColumn TItem="JournalGLLinkModel" Property="Code" Title="Code" Width="20%" TextAlign="TextAlign.Center"
+      Link="@(row => $"/systemsetting/gllink/{row.ID}")" />
+    <DataGridColumn TItem="JournalGLLinkModel" Property="Name" Title="Name" Width="60%" />
+    <DataGridColumn TItem="JournalGLLinkModel" Property="IsActive" Title="Active" Width="20%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

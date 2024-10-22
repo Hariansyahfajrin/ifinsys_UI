@@ -1,0 +1,16 @@
+<RadzenStack>
+  <RadzenStack>
+    <!-- #region Toolbar -->
+    <!-- #endregion -->
+
+    <!-- #region List Data -->
+    <DataGrid ID="BranchDataGrid" @ref=@dataGrid TItem="SysEmployeeMainModel" LoadData="LoadData" AllowSelected="false">
+      <DataGridColumn TItem="SysEmployeeMainModel" Property="NIK" Title="NIK" Width="20%"
+        Link="@(row => $"/companyinformation/employee/{row.ID}")" TextAlign="TextAlign.Center" />
+      <DataGridColumn TItem="SysEmployeeMainModel" Property="Name" Title="Name" />
+      <DataGridColumn TItem="SysEmployeeMainModel" Property="BasePositionDescription" Title="Position" />
+      <DataGridColumn TItem="SysEmployeeMainModel" Property="IsActive" Title="Active" FormatString="YN" />
+    </DataGrid>
+    <!-- #endregion -->
+  </RadzenStack>
+</RadzenStack>

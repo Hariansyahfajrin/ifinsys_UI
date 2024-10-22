@@ -1,0 +1,16 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="SysHolidayDataGrid" @ref=@dataGrid TItem="SysHolidayModel" LoadData="LoadData" AllowSelected="false">
+    <DataGridColumn TItem="SysHolidayModel" Property="Description" Title="Description" Width="50%"
+      Link="@(row => $"/commonmasterfile/publicholiday/{row.ID}")" />
+    <DataGridColumn TItem="SysHolidayModel" Property="HolidayDate" Title="Date" />
+    <DataGridColumn TItem="SysHolidayModel" Property="IsActive" Title="Active" Width="20%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

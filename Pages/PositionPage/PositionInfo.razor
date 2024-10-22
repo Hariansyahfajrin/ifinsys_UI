@@ -1,0 +1,14 @@
+@page "/companyinformation/position/add"
+@page "/companyinformation/position/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysPositionComponent
+
+<Card>
+	<Title Text="Position Info" />
+
+	<SysPositionForm ID=@ID />
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}

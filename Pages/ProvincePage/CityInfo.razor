@@ -1,0 +1,15 @@
+@page "/commonmasterfile/province/{ProvinceID}/city/add"
+@page "/commonmasterfile/province/{ProvinceID}/city/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysCityComponent
+
+<Card>
+	<Title Text="City Info" />
+
+	<SysCityForm ID="@ID" ProvinceID="@ProvinceID" />
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+	[Parameter] public string? ProvinceID { get; set; }
+}

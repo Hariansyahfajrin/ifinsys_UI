@@ -1,0 +1,20 @@
+<!-- #region Form -->
+<RadzenTemplateForm TItem="SysRoleGroupModel" Data="@row" Submit=@OnSubmit>
+	<RadzenStack>
+		<!-- #region Toolbar -->
+		<RadzenRow Gap="8">
+			<RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+			<RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+		</RadzenRow>
+		<!-- #endregion -->
+
+		<RadzenStack>
+			<RadzenRow>
+				<!-- #region Name -->
+				<FormFieldTextArea Label="Name" Name="Name" @bind-Value="@row.Name" Max="4000" Required="true" />
+				<!-- #endregion -->
+			</RadzenRow>
+		</RadzenStack>
+	</RadzenStack>
+</RadzenTemplateForm>
+<!-- #endregion -->

@@ -1,0 +1,49 @@
+ <!-- #region Form -->
+  <RadzenTemplateForm TItem="SysUserMainModel" Data="@row" Submit=@OnSubmit>
+    <RadzenStack>
+      <!-- #region Toolbar -->
+      <RadzenRow Gap="8">
+        @* <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" /> *@
+        @if (ID != null)
+        {
+          <RadzenButton ButtonStyle=@(row.IsActive == 1 ? ButtonStyle.Danger : ButtonStyle.Success) Text=@(row.IsActive ==
+          1 ? "Non Active" : "Active") Click="@ChangeActive" />
+        }
+        <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+      </RadzenRow>
+      <!-- #endregion -->
+
+      <RadzenStack>
+        <RadzenRow>
+          <!-- #region Code -->
+          <FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Disabled="true" />
+          <!-- #endregion -->
+
+          <!-- #region EmployeeName -->
+          <FormFieldTextBox Label="Name" Name="EmployeeName" @bind-Value="@row.EmployeeName" Disabled="true" />
+          <!-- #endregion -->
+
+          <!-- #region Is Active -->
+          <FormFieldSwitch Name="IsActive" Label="Active" @bind-Value="@row.IsActive" Disabled />
+          <!-- #endregion -->
+
+          <!-- #region LastLoginDate -->
+          <FormFieldDatePicker Label="Last Login Date" Name="LastLoginDate" @bind-Value="@row.LastLoginDate"
+            Disabled="true" />
+          <!-- #endregion -->
+
+          <!-- #region LastLoginDate -->
+          <FormFieldNumeric Label="Last Fail Count" Name="LastFailCount" @bind-Value="@row.LastFailCount"
+            Disabled="true" />
+          <!-- #endregion -->
+
+          <!-- #region LastLoginDate -->
+          <FormFieldDatePicker Label="Next Change Password" Name="NextChangePass" @bind-Value="@row.NextChangePass"
+            Disabled="true" />
+          <!-- #endregion -->
+
+        </RadzenRow>
+      </RadzenStack>
+    </RadzenStack>
+  </RadzenTemplateForm>
+  <!-- #endregion -->

@@ -1,0 +1,30 @@
+<!-- #region Form -->
+	<RadzenTemplateForm TItem="SysPositionModel" Data="@row" Submit=@OnSubmit>
+		<RadzenStack>
+			<!-- #region Toolbar -->
+			<RadzenRow Gap="8">
+				<RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+				@if (ID != null)
+				{
+					<RadzenButton ButtonStyle=@(row.IsActive == 1 ? ButtonStyle.Danger : ButtonStyle.Success) Text=@(row.IsActive ==
+					1 ? "Non Active" : "Active") Click="@ChangeActive" />
+				}
+				<RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+			</RadzenRow>
+			<!-- #endregion -->
+
+			<RadzenStack>
+				<RadzenRow>
+					<!-- #region Description -->
+					<FormFieldTextArea Label="Description" Name="Description" @bind-Value="@row.Description" Max="4000"
+						Required="true" />
+					<!-- #endregion -->
+
+					<!-- #region Is Active -->
+					<FormFieldSwitch Name="IsActive" Label="Active" @bind-Value="@row.IsActive" Disabled />
+					<!-- #endregion -->
+				</RadzenRow>
+			</RadzenStack>
+		</RadzenStack>
+	</RadzenTemplateForm>
+	<!-- #endregion -->

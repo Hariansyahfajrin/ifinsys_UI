@@ -1,0 +1,29 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@(() => menuRoleLookup.Open())" />
+    <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="SysUserMainRoleSecDataGrid" @ref=@dataGrid TItem="SysUserMainRoleSecModel" LoadData="LoadData"
+    AllowSelected="true">
+    <DataGridColumn TItem="SysUserMainRoleSecModel" Property="RoleCode" Title="Code" Width="30%" />
+    <DataGridColumn TItem="SysUserMainRoleSecModel" Property="RoleName" Title="Description" Width="70%" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>
+
+<!-- #region Lookup Add -->
+<MultipleSelectLookup @ref="menuRoleLookup" ID="SysMenuRoleLookup" TItem="SysMenuRoleModel"
+  LoadData="LoadLookupMenuRole" Title="Menu User Group Role List">
+  <ToolbarTemplate>
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </ToolbarTemplate>
+  <ColumnsTemplate>
+    <DataGridColumn TItem="SysMenuRoleModel" Property="Code" Title="Code" Width="25%" TextAlign="TextAlign.Center" />
+    <DataGridColumn TItem="SysMenuRoleModel" Property="Name" Title="Name" Width="75%" />
+  </ColumnsTemplate>
+</MultipleSelectLookup>
+<!-- #endregion -->

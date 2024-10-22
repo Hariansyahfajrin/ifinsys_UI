@@ -1,0 +1,17 @@
+<RadzenStack>
+    <!-- #region Toolbar -->
+    <RadzenRow Gap="8">
+      <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+      <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete"  />
+    </RadzenRow>
+    <!-- #endregion -->
+
+    <!-- #region List Data -->
+    <DataGrid ID="SysRoleGroupDataGrid" @ref=@dataGrid TItem="SysRoleGroupModel" LoadData="LoadData"
+      AllowSelected="true">
+      <DataGridColumn TItem="SysRoleGroupModel" Property="Code" Title="Code" Width="30%" TextAlign="TextAlign.Center"
+        Link="@(row => $"/systemsecurity/grouprole/{row.ID}")" />
+      <DataGridColumn TItem="SysRoleGroupModel" Property="Name" Title="Description" Width="70%" />
+    </DataGrid>
+    <!-- #endregion -->
+  </RadzenStack>

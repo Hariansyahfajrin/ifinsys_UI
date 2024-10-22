@@ -1,0 +1,95 @@
+<!-- #region Form -->
+  <RadzenTemplateForm TItem="SysMenuModel" Data="@row" Submit=@OnSubmit>
+		<RadzenStack>
+			<!-- #region Toolbar -->
+			<RadzenRow Gap="8">
+				<RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+				@if (ID != null)
+				{
+					<RadzenButton ButtonStyle=@(row.IsActive == 1 ? ButtonStyle.Danger : ButtonStyle.Success) Text=@(row.IsActive ==
+					1 ? "Non Active" : "Active") Click="@ChangeActive" />
+				}
+				<RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+			</RadzenRow>
+			<!-- #endregion -->
+
+			@if (row != null)
+			{
+				<RadzenStack>
+					<RadzenRow>
+						<!-- #region Code -->
+						<FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Disabled="true" Max="50" />
+						<!-- #endregion -->
+
+						<!-- #region Name -->
+						<FormFieldTextBox Label="Name" Name="Name" @bind-Value="@row.Name" Required="true" Max="50" />
+						<!-- #endregion -->
+
+						<!-- #region Is Active -->
+						<FormFieldSwitch Name="IsActive" Label="Active" @bind-Value="@row.IsActive" Disabled />
+						<!-- #endregion -->
+
+						<!-- #region Module -->
+						<FormFieldButtonLookup Name="ModuleID" Label="Module" Target="moduleLookup" @bind-Value="@row.ModuleID"
+							@bind-Text="@row.ModuleCode" Required="true" />
+						<!-- #endregion -->
+
+						<!-- #region Parent -->
+						<FormFieldButtonLookup Name="ParentMenuID" Label="Parent" Target="parentLookup"
+							@bind-Value="@row.ParentMenuID" @bind-Text="@row.ParentMenuName" Required=@(row.Type == "Child")
+							Disabled=@(row.ModuleID == null) />
+						<!-- #endregion -->
+
+						<!-- #region Abbreviation -->
+						<FormFieldTextBox Label="Abbreviation" Name="Abbreviation" @bind-Value="@row.Abbreviation" Max="50" />
+						<!-- #endregion -->
+
+						<!-- #region RoutingMenu -->
+						<FormFieldTextBox Label="Routing Menu" Name="RoutingMenu" @bind-Value="@row.RoutingMenu" Max="50" />
+						<!-- #endregion -->
+
+						<!-- #region URLMenu -->
+						<FormFieldTextBox Label="Url Menu" Name="URLMenu" @bind-Value="@row.URLMenu" Required="true" Max="50" />
+						<!-- #endregion -->
+
+						<!-- #region CssIcon -->
+						<FormFieldTextBox Label="Css Icon" Name="CssIcon" @bind-Value="@row.CssIcon" Max="50" />
+						<!-- #endregion -->
+
+						<!-- #region Type -->
+						<FormFieldRadioButton Label="Type" TValue="string" @bind-Value="row.Type" Items="@menuTypes" />
+						<!-- #endregion -->
+
+						<!-- #region OrderKey -->
+						<FormFieldNumeric Label="Order" Name="OrderKey" @bind-Value="@row.OrderKey" Required="true" Min="1" />
+						<!-- #endregion -->
+					</RadzenRow>
+				</RadzenStack>
+			}
+		</RadzenStack>
+	</RadzenTemplateForm>
+<!-- #endregion -->
+
+
+<!-- #region Module Lookup -->
+<SingleSelectLookup ID="ModuleLookup" @ref="@moduleLookup" TItem="SysModuleModel" LoadData="LoadModuleLookup"
+	Title="Module List" Select="(select) => {
+								row.ModuleID = select.ID;
+								row.ModuleCode = select.Code;
+							}">
+	<DataGridColumn TItem="SysModuleModel" Property="Code" Title="Code" />
+	<DataGridColumn TItem="SysModuleModel" Property="Name" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->
+
+<!-- #region Parent Lookup -->
+<SingleSelectLookup ID="ParentMenuLookup" @ref="@parentLookup" TItem="SysMenuModel" LoadData="LoadParentLookup"
+	Title="Parent List" Select="@((select) => {
+								row.ParentMenuID = select.ID;
+								row.ParentMenuName = select.Name;
+								row.Type = "Child"; 
+								})">
+	<DataGridColumn TItem="SysMenuModel" Property="Code" Title="Code" />
+	<DataGridColumn TItem="SysMenuModel" Property="Name" Title="Name" />
+</SingleSelectLookup>
+<!-- #endregion -->

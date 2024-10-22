@@ -1,0 +1,20 @@
+<RadzenStack>
+	<!-- #region Toolbar -->
+	<RadzenRow Gap="8">
+		<FormFieldDatePicker Label="From Date" Name="FromDate" @bind-Value=@(filters["FromDate"])
+			Change="@(async () => await dataGrid.Reload())" />
+		<FormFieldDatePicker Label="To Date" Name="ToDate" @bind-Value=@(filters["ToDate"])
+			Change="@(async () => await dataGrid.Reload())" />
+	</RadzenRow>
+	<!-- #endregion -->
+
+	<!-- #region List Data -->
+	<DataGrid ID="SysUserMainRoleSecDataGrid" @ref=@dataGrid TItem="SysUserLoginLogModel" LoadData="LoadData"
+		AllowSelected="true">
+		<DataGridColumn TItem="SysUserLoginLogModel" Property="LoginDate" Title="Date" Width="30%" />
+		<DataGridColumn TItem="SysUserLoginLogModel" Property="FlagCode" Title="Activity" Width="70%" />
+		<DataGridColumn TItem="SysUserLoginLogModel" Property="SessionID" Title="Session ID" Width="70%" />
+		<DataGridColumn TItem="SysUserLoginLogModel" Property="CreIPAddress" Title="IP" Width="70%" />
+	</DataGrid>
+	<!-- #endregion -->
+</RadzenStack>

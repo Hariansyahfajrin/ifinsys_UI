@@ -1,0 +1,18 @@
+<RadzenStack>
+	<!-- #region Toolbar -->
+	<RadzenRow Gap="8">
+		@* <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" /> *@
+		@* <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete"  /> *@
+	</RadzenRow>
+	<!-- #endregion -->
+
+	<!-- #region List Data -->
+	<DataGrid ID="SysUserDataGrid" @ref=@dataGrid TItem="SysUserMainModel" LoadData="LoadData" AllowSelected="false">
+		<DataGridColumn TItem="SysUserMainModel" Property="Code" Title="User ID" Width="20%" TextAlign="TextAlign.Center"
+			Link="@(row => $"/systemsecurity/user/{row.ID}")" />
+		<DataGridColumn TItem="SysUserMainModel" Property="EmployeeName" Title="Name" Width="40%" />
+		<DataGridColumn TItem="SysUserMainModel" Property="LastLoginDate" Title="Last Login Time" Width="25%" />
+		<DataGridColumn TItem="SysUserMainModel" Property="IsActive" Title="Active" Width="15%" FormatString="YN" />
+	</DataGrid>
+	<!-- #endregion -->
+</RadzenStack>

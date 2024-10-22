@@ -1,0 +1,15 @@
+@page "/systemsetting/menu/{MenuID}/menurole/add"
+@page "/systemsetting/menu/{MenuID}/menurole/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysMenuRoleComponent
+
+<Card>
+  <Title Text="Menu Role Info" />
+
+  <SysMenuRoleForm ID="@ID" MenuID="@MenuID" />
+</Card>
+
+@code {
+  [Parameter] public string? ID { get; set; }
+  [Parameter] public string? MenuID { get; set; }
+}

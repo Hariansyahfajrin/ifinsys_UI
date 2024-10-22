@@ -1,0 +1,17 @@
+<RadzenStack>
+	<!-- #region Toolbar -->
+	<RadzenRow Gap="8">
+		<RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+	</RadzenRow>
+	<!-- #endregion -->
+
+	<!-- #region List Data -->
+	<DataGrid ID="CompanyParamDataGrid" @ref=@dataGrid TItem="SysCompanyParamModel" LoadData="LoadData"
+		AllowSelected="false">
+		<DataGridColumn TItem="SysCompanyParamModel" Property="Code" Title="Code" Width="20%"
+			Link="@(row => $"/companyinformation/company/{CompanyID}/companyparam/{row.ID}")" />
+		<DataGridColumn TItem="SysCompanyParamModel" Property="Description" Title="Description" />
+		<DataGridColumn TItem="SysCompanyParamModel" Property="Value" Title="Value" />
+	</DataGrid>
+	<!-- #endregion -->
+</RadzenStack>

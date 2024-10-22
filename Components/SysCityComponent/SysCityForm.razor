@@ -1,0 +1,61 @@
+<!-- #region Form -->
+	<RadzenTemplateForm TItem="SysCityModel" Data="@row" Submit=@OnSubmit>
+		<RadzenStack>
+			<!-- #region Toolbar -->
+			<RadzenRow Gap="8">
+				<RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+				@if (ID != null)
+				{
+					<RadzenButton ButtonStyle=@(row.IsActive == 1 ? ButtonStyle.Danger : ButtonStyle.Success) Text=@(row.IsActive ==
+					1 ? "Non Active" : "Active") Click="@ChangeActive" />
+				}
+				<RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+			</RadzenRow>
+			<!-- #endregion -->
+
+			<RadzenStack>
+				@if (rowProvince != null)
+				{
+					<RadzenRow>
+						<!-- #region Province Code -->
+						<FormFieldTextBox Label="Province Code" Name="ProvinceCode" @bind-Value="@rowProvince.Code" Max="50"
+							Disabled="true" />
+						<!-- #endregion -->
+
+						<!-- #region Province Description -->
+						<FormFieldTextBox Label="Province Description" Name="ProvinceDescription"
+							@bind-Value="@rowProvince.Description" Max="4000" Disabled="true" />
+						<!-- #endregion -->
+					</RadzenRow>
+
+				}
+
+
+				<RadzenRow>
+					<!-- #region Code -->
+					<FormFieldTextBox Label="Code" Name="Code" @bind-Value="@row.Code" Required=true Max="50" />
+					<!-- #endregion -->
+
+					<!-- #region Description -->
+					<FormFieldTextArea Label="Description" Name="Description" @bind-Value="@row.Description" Max="4000"
+						Required="true" />
+					<!-- #endregion -->
+
+					<!-- #region Is Active -->
+					<FormFieldSwitch Name="IsActive" Label="Active" @bind-Value="@row.IsActive" Disabled />
+					<!-- #endregion -->
+				</RadzenRow>
+
+				<RadzenRow>
+					<!-- #region Plat -->
+					<FormFieldTextBox Label="Plat" Name="Plat" @bind-Value="@row.Plat" Required=true Max="2" />
+					<!-- #endregion -->
+
+					<!-- #region BI Code -->
+					<FormFieldTextBox Label="BI Code" Name="BICode" @bind-Value="@row.BICode" Required=true Max="10" />
+					<!-- #endregion -->
+				</RadzenRow>
+			</RadzenStack>
+		</RadzenStack>
+	</RadzenTemplateForm>
+	<!-- #endregion -->

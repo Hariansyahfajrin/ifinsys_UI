@@ -1,0 +1,35 @@
+<!-- #region Form -->
+	<RadzenTemplateForm TItem="SysCurrencyRateModel" Data="@row" Submit=@OnSubmit>
+		<RadzenStack>
+			<!-- #region Toolbar -->
+			<RadzenRow Gap="8">
+				<RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Primary" Text="Save" />
+				<RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Back" Click="@Back" />
+			</RadzenRow>
+			<!-- #endregion -->
+
+			<RadzenStack>
+				<RadzenRow>
+					<!-- #region EffectiveDate -->
+					<FormFieldDatePicker Label="Effective Date" Name="EffectiveDate" @bind-Value="@row.EffectiveDate" />
+					<!-- #endregion -->
+
+					<!-- #region BuyRate -->
+					<FormFieldNumeric Label="Buy Rate (%)" Name="BuyRate" @bind-Value="@row.BuyRate" ShowUpDown="false"
+						Format="#,#.000000" />
+					<!-- #endregion -->
+
+					<!-- #region SaleBuyMid -->
+					<FormFieldNumeric Label="Middle Rate (%)" Name="SaleBuyMid" @bind-Value="@row.SaleBuyMid" ShowUpDown="false"
+						Format="#,#.000000" />
+					<!-- #endregion -->
+
+					<!-- #region SaleRate -->
+					<FormFieldNumeric Label="Sale Rate (%)" Name="SaleRate" @bind-Value="@row.SaleRate" ShowUpDown="false"
+						Format="#,#.000000" />
+					<!-- #endregion -->
+				</RadzenRow>
+			</RadzenStack>
+		</RadzenStack>
+	</RadzenTemplateForm>
+	<!-- #endregion -->

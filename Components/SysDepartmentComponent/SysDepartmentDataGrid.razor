@@ -1,0 +1,18 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="DepartmentDataGrid" @ref=@dataGrid TItem="SysDepartmentModel" LoadData="LoadData" AllowSelected="false">
+    <DataGridColumn TItem="SysDepartmentModel" Property="Code" Title="Code"
+      Link="@(row => $"/companyinformation/department/{row.ID}")" />
+    <DataGridColumn TItem="SysDepartmentModel" Property="Description" Title="Description" />
+    <DataGridColumn TItem="SysDepartmentModel" Property="DivisionDescription" Title="Division" />
+    <DataGridColumn TItem="SysDepartmentModel" Property="IsActive" Title="Active" Width="10%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+
+</RadzenStack>

@@ -1,0 +1,17 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+    @* <RadzenButton ButtonStyle="ButtonStyle.Danger" Text="Delete" Click="@Delete" /> *@
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="SysNotificationDataGrid" @ref=@dataGrid TItem="SysNotificationModel" LoadData="LoadData"
+    AllowSelected="false">
+    <DataGridColumn TItem="SysNotificationModel" Property="Description" Title="Description" Width="80%"
+      Link="@(row => $"/systemsetting/notification/{row.ID}")" />
+    <DataGridColumn TItem="SysNotificationModel" Property="IsActive" Title="Active" Width="20%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

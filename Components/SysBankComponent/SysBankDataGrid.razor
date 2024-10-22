@@ -1,0 +1,16 @@
+<RadzenStack>
+  <!-- #region Toolbar -->
+  <RadzenRow Gap="8">
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Add" Click="@Add" />
+  </RadzenRow>
+  <!-- #endregion -->
+
+  <!-- #region List Data -->
+  <DataGrid ID="BankDataGrid" @ref=@dataGrid TItem="SysBankModel" LoadData="LoadData" AllowSelected="false">
+    <DataGridColumn TItem="SysBankModel" Property="Code" Title="Code" Width="20%" TextAlign="TextAlign.Center"
+      Link="@(row => $"/commonmasterfile/bank/{row.ID}")" />
+    <DataGridColumn TItem="SysBankModel" Property="Description" Title="Description" />
+    <DataGridColumn TItem="SysBankModel" Property="IsActive" Title="Active" Width="20%" FormatString="YN" />
+  </DataGrid>
+  <!-- #endregion -->
+</RadzenStack>

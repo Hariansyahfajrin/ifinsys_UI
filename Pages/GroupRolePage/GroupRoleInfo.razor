@@ -1,0 +1,22 @@
+@page "/systemsecurity/grouprole/add"
+@page "/systemsecurity/grouprole/{ID}"
+
+@using IFinancing360_SYS_UI.Components.SysRoleGroupComponent
+@using IFinancing360_SYS_UI.Components.SysRoleGroupDetailComponent
+<Card>
+	<Title Text="Group Role Info" />
+
+	<SysRoleGroupForm ID="@ID" />
+
+	@if (ID != null)
+	{
+		<Divider />
+		<Title Text="Group Role Detail List" />
+
+		<SysRoleGroupDetailDataGrid GroupRoleID="@ID" />
+	}
+</Card>
+
+@code {
+	[Parameter] public string? ID { get; set; }
+}
